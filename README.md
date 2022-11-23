@@ -1,2 +1,3 @@
-# todoJka
-todo app
+npm i express ejs mongoose
+
+
