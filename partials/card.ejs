@@ -1,0 +1,37 @@
+  <% for (let taskpanel of taskpanels) {%>
+  <div class="card" style="width: 18rem;">
+    <div class="">
+      <form action="/" method="get">
+        <%= taskpanel.title %>
+    </div>
+    <br>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <%= taskpanel.task[0] %>
+      </li>
+      <li class="list-group-item">
+        <%= taskpanel.task[1] %>
+      </li>
+      <li class="list-group-item">
+        <%= taskpanel.task[2] %>
+      </li>
+    </ul>
+    </form>
+    <!-- When you are push the button or some url 
+      your card must be delete all information in all of filed -->
+    <!-- It must be hide original card and make 
+        a new form with an all fields of old form -->
+    <form action="/<%= taskpanel._id%>?_method=PUT" method="POST">
+      <li class="list-group-item">
+        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task[0] %>">
+      </li>
+      <li class="list-group-item">
+        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task[1] %>">
+      </li>
+      <li class="list-group-item">
+        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task[2] %>">
+      </li>
+      <button>edit</button>
+    </form>
+  </div>
+  <% } %>

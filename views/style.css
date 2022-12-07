@@ -1,0 +1,42 @@
+h1 {
+    margin-left: 10px;
+}
+
+.nav-link {
+    padding: 0.25rem 0;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 1rem;
+    border-bottom: 0.25rem solid transparent;
+}
+
+.nav-link:hover {
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color: white;
+}
+
+.card {
+    height: 22rem;
+    border: solid;
+    border-color: #212529;
+    margin: 1rem;
+}
+
+#card {
+    display: none;
+}
+
+#addBtn {
+    width: 18rem;
+    border: solid;
+    height: 22rem;
+    font-size: 100px;
+    margin: 1rem;
+    background-color: gray;
+    border-color: black;
+}

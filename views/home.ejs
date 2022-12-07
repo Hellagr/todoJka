@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>BLOODY</h1>
-</body>
-</html>
+<%- include('../partials/head.ejs')%>
+<%- include('../partials/navbar.ejs')%>
+<h1 class="fs-4">Your Tasks</h1>
+<div class="container-fluid">
+  <div class="row">
+
+    <%- include('../partials/card.ejs')%>
+    <%- include('../partials/addcard.ejs')%>
+
+    <button onclick="hideAddcard" id="addBtn" class="btn btn-primary">+</button>
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs')%>
