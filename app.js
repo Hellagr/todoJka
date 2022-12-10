@@ -4,6 +4,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const Taskpanel = require('./models/taskpanel');
+const taskpanel = require('./models/taskpanel');
 
 
 
@@ -40,6 +41,12 @@ app.put('/:id', async (req, res) => {
     const taskpanel = await Taskpanel.findByIdAndUpdate(id, { ...req.body.taskpanel });
     res.redirect('/');
 });
+
+app.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    await Taskpanel.findByIdAndDelete(id);
+    res.redirect('/');
+})
 
 
 
