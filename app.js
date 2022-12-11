@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const Taskpanel = require('./models/taskpanel');
 const taskpanel = require('./models/taskpanel');
+const morgan = require('morgan')
 
 
 
@@ -30,6 +31,10 @@ app.get("/", async (req, res) => {
     res.render('home', { taskpanels })
 });
 
+app.get("/404", async (req, res) => {
+    res.render('404')
+});
+
 app.post("/", async (req, res) => {
     const taskpanel = new Taskpanel(req.body.taskpanel);
     await taskpanel.save();
@@ -48,7 +53,9 @@ app.delete('/:id', async (req, res) => {
     res.redirect('/');
 })
 
-
+app.use((req, res) => {
+    res.redirect('/404')
+})
 
 
 app.listen(3000, () => {
