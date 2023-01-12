@@ -2,6 +2,11 @@ h1 {
     margin-left: 10px;
 }
 
+br {
+    border: 2px solid black;
+    color: black;
+}
+
 .nav-link {
     padding: 0.25rem 0;
     font-weight: 700;
@@ -39,4 +44,25 @@ h1 {
     margin: 1rem;
     background-color: gray;
     border-color: black;
+}
+
+.confirm {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    padding: 0.5rem 0.5rem;
+    border-bottom: 0.1rem solid;
+}
+
+.confirmbtn {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    padding: 0.5rem 0.5rem;
+}
+
+.form-control {
+    border: 1px solid #000000;
 }

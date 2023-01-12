@@ -7,29 +7,13 @@
     <br>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <%= taskpanel.task[0] %>
-      </li>
-      <li class="list-group-item">
-        <%= taskpanel.task[1] %>
-      </li>
-      <li class="list-group-item">
-        <%= taskpanel.task[2] %>
+        <%= taskpanel.task %>
       </li>
     </ul>
     </form>
-    <!-- When you are push the button or some url 
-      your card must be delete all information in all of filed -->
-    <!-- It must be hide original card and make 
-        a new form with an all fields of old form -->
     <form action="/<%= taskpanel._id%>?_method=PUT" method="POST">
       <li class="list-group-item">
-        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task[0] %>">
-      </li>
-      <li class="list-group-item">
-        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task[1] %>">
-      </li>
-      <li class="list-group-item">
-        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task[2] %>">
+        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task %>">
       </li>
       <button>edit</button>
     </form>
