@@ -4,7 +4,6 @@ const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const Taskpanel = require('./models/taskpanel');
-const taskpanel = require('./models/taskpanel');
 const morgan = require('morgan')
 
 

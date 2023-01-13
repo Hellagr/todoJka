@@ -1,24 +1,34 @@
   <% for (let taskpanel of taskpanels) {%>
-  <div class="card" style="width: 18rem;">
-    <div class="">
+
+  <div id="card" class="card" style="width: 18rem;">
+
+    <div id="valueTitleTask">
       <form action="/" method="get">
-        <%= taskpanel.title %>
+        <div class="valueTitle">
+          <%= taskpanel.title %>
+        </div>
+        <div class="valueTask" style="overflow: auto">
+          <%= taskpanel.task %>
+        </div>
+      </form>
+
+
+      <button id="editBtn" class=" btn btn-warning">Edit this card</button>
+      <form action="/<%= taskpanel._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Delete this card</button>
+      </form>
     </div>
-    <br>
-    <ul class="list-group list-group-flush">
+
+
+    <form id="editForm" style="display: none;" action="/<%= taskpanel._id%>?_method=PUT" method="POST">
       <li class="list-group-item">
-        <%= taskpanel.task %>
+        <input type="text" name="taskpanel[title]" value="<%= taskpanel.title %>">
       </li>
-    </ul>
-    </form>
-    <form action="/<%= taskpanel._id%>?_method=PUT" method="POST">
       <li class="list-group-item">
         <input type="text" name="taskpanel[task]" value="<%= taskpanel.task %>">
       </li>
-      <button>edit</button>
-    </form>
-    <form action="/<%= taskpanel._id%>?_method=DELETE" method="POST">
-      <button>DELETE</button>
+      <button class="btn btn-warning">Confirm changes</button>
     </form>
   </div>
+
   <% } %>
