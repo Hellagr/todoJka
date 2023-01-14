@@ -1,34 +1,35 @@
-  <% for (let taskpanel of taskpanels) {%>
+<% for (let taskpanel of taskpanels) {%>
 
-  <div id="card" class="card" style="width: 18rem;">
+<div class="card" id="card" style="width: 18rem;">
 
-    <div id="valueTitleTask">
-      <form action="/" method="get">
-        <div class="valueTitle">
-          <%= taskpanel.title %>
-        </div>
-        <div class="valueTask" style="overflow: auto">
-          <%= taskpanel.task %>
-        </div>
-      </form>
+  <div id="<%= taskpanel._id; %>">
 
+    <form action="/" method="get">
+      <div class="valueTitle">
+        <%= taskpanel.title %>
+      </div>
+      <div class="valueTask" style="overflow: auto">
+        <%= taskpanel.task %>
+      </div>
+    </form>
 
-      <button id="editBtn" class=" btn btn-warning">Edit this card</button>
-      <form action="/<%= taskpanel._id%>?_method=DELETE" method="POST">
-        <button class="btn btn-danger">Delete this card</button>
-      </form>
-    </div>
+    <button id="editBtn" class="btn btn-warning">Edit this card</button>
 
 
-    <form id="editForm" style="display: none;" action="/<%= taskpanel._id%>?_method=PUT" method="POST">
-      <li class="list-group-item">
-        <input type="text" name="taskpanel[title]" value="<%= taskpanel.title %>">
-      </li>
-      <li class="list-group-item">
-        <input type="text" name="taskpanel[task]" value="<%= taskpanel.task %>">
-      </li>
-      <button class="btn btn-warning">Confirm changes</button>
+    <form action="/<%= taskpanel._id %>?_method=DELETE" method="POST">
+      <button class="btn btn-danger">Delete this card</button>
     </form>
   </div>
 
-  <% } %>
+  <form id="editForm" style="display: none;" action="/<%= taskpanel._id %>?_method=PUT" method="POST">
+    <li class="list-group-item">
+      <input type="text" name="taskpanel[title]" value="<%= taskpanel.title %>">
+    </li>
+    <li class="list-group-item">
+      <input type="text" name="taskpanel[task]" value="<%= taskpanel.task %>">
+    </li>
+    <button class="btn btn-warning">Confirm changes</button>
+  </form>
+</div>
+
+<% } %>

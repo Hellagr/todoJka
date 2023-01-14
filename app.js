@@ -8,7 +8,6 @@ const morgan = require('morgan')
 
 
 
-
 mongoose.connect('mongodb://localhost:27017/todojka', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 })
 
 const db = mongoose.connection;
