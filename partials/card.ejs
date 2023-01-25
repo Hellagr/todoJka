@@ -2,8 +2,8 @@
 
 <div class="card" id="card" style="width: 18rem;">
 
-  <div id="valueIncard" class="valueIncard">
-    <form action=" /" method="get">
+  <div id="<%= taskpanel.id %>" class="valueIncard">
+    <form action="/" method="get">
       <div class="valueTitle">
         <%= taskpanel.title %>
       </div>
@@ -12,15 +12,15 @@
       </div>
     </form>
 
-    <button id="editBtn" class="btn btn-warning">Edit this card</button>
-
+    <button id="<%= taskpanel.id %>" onClick="reply_click(this.id)" class="btn btn-warning">Edit this card</button>
 
     <form action="/<%= taskpanel._id %>?_method=DELETE" method="POST">
       <button class="btn btn-danger">Delete this card</button>
     </form>
+
   </div>
 
-  <form id="editForm" style="display: none;" action="/<%= taskpanel._id %>?_method=PUT" method="POST">
+  <form id="<%= taskpanel.id %>" style="display: none;" class="editForm" action="/<%= taskpanel._id %>?_method=PUT" method="POST">
     <li class="list-group-item">
       <input type="text" name="taskpanel[title]" value="<%= taskpanel.title %>">
     </li>
