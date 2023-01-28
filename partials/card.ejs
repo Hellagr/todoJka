@@ -1,8 +1,8 @@
 <% for (let taskpanel of taskpanels) {%>
 
-<div class="card" id="card" style="width: 18rem;">
+<div class="card" id="card" style="border-color: <%= taskpanel.colorBorder %>">
 
-  <div id="<%= taskpanel.id %>" class="valueIncard">
+  <div id=" <%= taskpanel.id %>" class="valueIncard">
     <form action="/" method="get">
       <div class="valueTitle">
         <%= taskpanel.title %>
@@ -11,15 +11,14 @@
         <%= taskpanel.task %>
       </div>
     </form>
+  </div>
 
-    <input type="color" class="btn" name="Color picker for card" id="">
-
-    <button id="<%= taskpanel.id %>" onClick="reply_click(this.id)" class="btn btn-warning">Edit this card</button>
+  <div class="content" style="">
+    <button id="<%= taskpanel.id %>" onClick="reply_click(this.id)" class="btn btn-warning" style="border-radius: 50%; padding: 2 rem;">&#9998;</button>
 
     <form action="/<%= taskpanel._id %>?_method=DELETE" method="POST">
-      <button class="btn btn-danger">Delete this card</button>
+      <button class="btn btn-danger" style="border-radius: 50%;">&#10006;</button>
     </form>
-
   </div>
 
   <form id="<%= taskpanel.id %>" style="display: none;" class="editForm" action="/<%= taskpanel._id %>?_method=PUT" method="POST">

@@ -27,9 +27,16 @@ br {
 
 .card {
     height: 22rem;
-    border: solid;
-    border-color: #212529;
+    border: solid 5px;
     margin: 1rem;
+    width: 18rem;
+    transition: 0.2s;
+
+}
+
+.card:hover {
+    transition: 0.2s;
+    box-shadow: 0 0px 10px #000000;
 }
 
 #addCard {
@@ -38,12 +45,18 @@ br {
 
 #addBtn {
     width: 18rem;
-    border: solid;
+    border: solid 5px;
     height: 22rem;
     font-size: 100px;
     margin: 1rem;
     background-color: gray;
     border-color: black;
+    transition: 0.2s;
+}
+
+#addBtn:hover {
+    transition: 0.2s;
+    box-shadow: 0 0px 10px #000000;
 }
 
 .confirm {
@@ -84,4 +97,11 @@ br {
 
 .form-control {
     border: 1px solid #000000;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5rem;
 }
