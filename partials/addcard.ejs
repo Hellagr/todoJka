@@ -3,19 +3,19 @@
   <form action="/" method="POST">
     <div class="confirm">
       <label for="title"></label>
-      <textarea class="form-control h-25 d-inline-block" name="taskpanel[title]" id="title" rows="1" placeholder="Enter a title"></textarea>
+      <textarea class="form-control h-25 d-inline-block" name="taskpanel[title]" id="title" rows="1" placeholder="Enter a title" required></textarea>
     </div>
     <div class="confirm">
       <label for="task"></label>
-      <textarea class="form-control h-50 d-inline-block" name="taskpanel[task]" id="task" rows="5" placeholder="Enter a task"></textarea>
+      <textarea class="form-control h-50 d-inline-block" name="taskpanel[task]" id="task" rows="5" placeholder="Enter a task" required></textarea>
     </div>
     <div class="confirm">
       <label for="colorBorder"></label>
       <div><input type="color" class="btn" name="taskpanel[colorBorder]" id="colorBorder">Chose a border color... </div>
     </div>
     <div class="confirmbtn">
-      <h5>Comfirm your task!</h5>
-      <button class="btn btn-primary">Confirm!</button>
+      <button class="btn btn-primary">Add this card</button>
+      <button class="btn btn-secondary" onclick="window.location.href=window.location.href">Cancel</button>
     </div>
   </form>
 </div>

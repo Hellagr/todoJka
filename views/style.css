@@ -1,5 +1,7 @@
 h1 {
-    margin-left: 10px;
+    margin-left: 1rem;
+    font-size: xx-large;
+    font: bold
 }
 
 br {
@@ -31,7 +33,6 @@ br {
     margin: 1rem;
     width: 18rem;
     transition: 0.2s;
-
 }
 
 .card:hover {
@@ -75,6 +76,8 @@ br {
     margin-bottom: 0;
     padding: 0.95rem 0.5rem;
     border-bottom: 0.1rem solid;
+    font-weight: 900;
+    font-size: large;
 }
 
 .valueTask {
@@ -84,13 +87,12 @@ br {
     margin-bottom: 0;
     padding: 0.95rem 0.5rem;
     border-bottom: 0.1rem solid;
-    height: 9.45rem;
+    height: 14rem;
 }
 
 .confirmbtn {
     display: flex;
     flex-direction: column;
-    padding-left: 0;
     margin-bottom: 0;
     padding: 0.5rem 0.5rem;
 }
@@ -99,9 +101,16 @@ br {
     border: 1px solid #000000;
 }
 
-.content {
+.mngBtn {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 5rem;
+    padding-top: 0.7rem;
+}
+
+#confirmChgBtn {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding: 0.5rem 0.5rem;
 }

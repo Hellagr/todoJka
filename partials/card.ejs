@@ -2,33 +2,41 @@
 
 <div class="card" id="card" style="border-color: <%= taskpanel.colorBorder %>">
 
-  <div id=" <%= taskpanel.id %>" class="valueIncard">
+  <div id="<%= taskpanel.id %>" class="valueIncard">
     <form action="/" method="get">
       <div class="valueTitle">
         <%= taskpanel.title %>
       </div>
-      <div class="valueTask" style="overflow: auto">
+      <div class="valueTask" style="overflow: auto;">
         <%= taskpanel.task %>
       </div>
     </form>
   </div>
 
-  <div class="content" style="">
-    <button id="<%= taskpanel.id %>" onClick="reply_click(this.id)" class="btn btn-warning" style="border-radius: 50%; padding: 2 rem;">&#9998;</button>
+  <div id="<%= taskpanel.id %>" class="mngBtn">
+    <button id="<%= taskpanel.id %>" onClick="reply_click(this.id)" class="btn btn-warning" style="border-radius: 50%;" title="Edit card">&#9998;</button>
 
     <form action="/<%= taskpanel._id %>?_method=DELETE" method="POST">
-      <button class="btn btn-danger" style="border-radius: 50%;">&#10006;</button>
+      <button class="btn btn-danger" style="border-radius: 50%;" title="Delete card">&#10006;</button>
     </form>
   </div>
 
   <form id="<%= taskpanel.id %>" style="display: none;" class="editForm" action="/<%= taskpanel._id %>?_method=PUT" method="POST">
-    <li class="list-group-item">
-      <input type="text" name="taskpanel[title]" value="<%= taskpanel.title %>">
-    </li>
-    <li class="list-group-item">
-      <input type="text" name="taskpanel[task]" value="<%= taskpanel.task %>">
-    </li>
-    <button class="btn btn-warning">Confirm changes</button>
+    <div class="confirm">
+      <label for="title"></label>
+      <textarea class="form-control h-25 d-inline-block" name="taskpanel[title]" id="title" rows="1" required><%= taskpanel.title %></textarea>
+    </div>
+    <div class="confirm">
+      <label for="task"></label>
+      <textarea class="form-control h-50 d-inline-block" name="taskpanel[task]" id="task" rows="5" required><%= taskpanel.task %></textarea>
+    </div>
+    <div class="confirm">
+      <div><input type="color" class="btn" name="taskpanel[colorBorder]" id="colorBorder" value="<%= taskpanel.colorBorder %>">Chose a new color her</div>
+    </div>
+    <div id="confirmChgBtn">
+      <button class="btn btn-warning">Confirm changes</button>
+      <button class="btn btn-secondary" onclick="window.location.href=window.location.href">Cancel</button>
+    </div>
   </form>
 </div>
 

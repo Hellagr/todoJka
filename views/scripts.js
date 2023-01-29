@@ -4,6 +4,7 @@ function hideAddcard() {
     document.getElementById('addCard').style.display = 'inline';
 }
 
+
 const valueIncard = document.querySelector('.valueIncard');
 // get a new array of object with a valueIncard class
 const allElements = document.querySelectorAll('*');
@@ -14,6 +15,7 @@ for (let i = 0; i < allElements.length; ++i) {
         idArr.push(allElements[i]);
     }
 }
+
 // get a new array of object with an idEditform class
 const idEditform = [];
 for (let i = 0; i < allElements.length; ++i) {
@@ -22,15 +24,29 @@ for (let i = 0; i < allElements.length; ++i) {
         idEditform.push(allElements[i]);
     }
 }
+
+// get a new array of object with an idEditform class
+const mngBtn = [];
+for (let i = 0; i < allElements.length; ++i) {
+    let el = allElements[i];
+    if (el.className == 'mngBtn') {
+        mngBtn.push(allElements[i]);
+    }
+}
+
 // compare id of elements and link it
 function reply_click(buttonId) {
     for (let i = 0; i < idArr.length; ++i) {
         let el = idArr[i];
         let idEdform = idEditform[i];
+        let idmngBtn = mngBtn[i];
         if (el.id == buttonId) {
             if (idEdform.id == buttonId) {
-                el.style.display = 'none';
-                idEdform.style.display = 'inline';
+                if (idmngBtn.id == buttonId) {
+                    idmngBtn.style.display = 'none';
+                    el.style.display = 'none';
+                    idEdform.style.display = 'inline';
+                }
             }
         }
     }
