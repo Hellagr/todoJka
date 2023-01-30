@@ -4,8 +4,9 @@ function hideAddcard() {
     document.getElementById('addCard').style.display = 'inline';
 }
 
-
 const valueIncard = document.querySelector('.valueIncard');
+const editformCancelBtn = document.querySelector('.cancelBtn')
+
 // get a new array of object with a valueIncard class
 const allElements = document.querySelectorAll('*');
 const idArr = [];
@@ -52,39 +53,8 @@ function reply_click(buttonId) {
     }
 }
 
-
-
-
-
-// let x = 0;
-// for (let i = 0; i < allElements.length; ++i) {
-//     let el = allElements[i];
-//     if (el.id == 'valueIncard') {
-//         idArr.push(x);
-//         document.getElementById("valueIncard").id = x;
-//         document.getElementById("editBtn").id = x;
-//         x++;
-//     }
-// }
-
-// const allBtn = document.querySelectorAll('button');
-// const idBtn = [];
-// for (let i = 0; i < allBtn.length; ++i) {
-//     let la = allBtn[i];
-//     if (la.id == i) {
-//         idBtn.push(i);
-//     }
-// }
-// console.log(allBtn)
-// console.log(idBtn)
-
-
-
-// editBtn.addEventListener('click', function () {
-//     if (idArr.id == idBtn.id) {
-//         console.log('hello matafaka')
-//     }
-// })
-
+function refreshPage() {
+    window.location.reload();
+}
 
 

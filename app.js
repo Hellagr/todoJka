@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname, "models/taskpanel")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+app.use(morgan('tiny'))
+
 app.get("/", async (req, res) => {
     const taskpanels = await Taskpanel.find({});
     res.render('home', { taskpanels })
@@ -49,11 +51,11 @@ app.delete('/:id', async (req, res) => {
     const { id } = req.params;
     await Taskpanel.findByIdAndDelete(id);
     res.redirect('/');
-})
+});
 
 app.use((req, res) => {
     res.redirect('/404')
-})
+});
 
 
 app.listen(3000, () => {
