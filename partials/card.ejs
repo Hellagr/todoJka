@@ -21,7 +21,7 @@
     </form>
   </div>
 
-  <form id="<%= taskpanel.id %>" style="display: none;" class="editForm" action="/<%= taskpanel._id %>?_method=PUT" method="POST">
+  <form id="<%= taskpanel.id %>" style="display: none;" class="editForm" action="/<%= taskpanel._id %>?_method=PUT" method="POST" novalidate>
 
     <div class="confirm">
       <label for="title"></label>
@@ -40,6 +40,5 @@
     </div>
   </form>
 </div>
-
 
 <% } %>
