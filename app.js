@@ -30,14 +30,14 @@ app.get("/", wrapAsync(async (req, res, next) => {
 }));
 
 app.post("/", wrapAsync(async (req, res) => {
-    if(!req.body.taskpanel) throw new AppError('Invalid Card Data!', 400);
+    if (!req.body.taskpanel) throw new AppError('Invalid Card Data!', 400);
     const taskpanel = new Taskpanel(req.body.taskpanel);
     await taskpanel.save();
     res.redirect(`/`);
 }));
 
 app.put('/:id', wrapAsync(async (req, res) => {
-    if(!req.body.taskpanel) throw new AppError('Invalid Card Data!', 400);
+    if (!req.body.taskpanel) throw new AppError('Invalid Card Data!', 400);
     const { id } = req.params;
     const taskpanel = await Taskpanel.findByIdAndUpdate(id, { ...req.body.taskpanel });
     res.redirect('/');
@@ -54,9 +54,9 @@ app.all('*', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    const { status = 500} = err;
-    if(!err.message) err.message = 'Something Went Wrong!';
-    res.status(status).render('ErrorPage', {err});
+    const { status = 500 } = err;
+    if (!err.message) err.message = 'Something Went Wrong!';
+    res.status(status).render('ErrorPage', { err });
 })
 
 app.listen(3000, () => {
