@@ -1,10 +1,13 @@
 <%- include('../partials/head.ejs')%>
 <%- include('../partials/navbar.ejs')%>
-<div class="row">
-  <div class="col-6 offset-3">
-    <div class="alert alert-danger" role="alert">
-      <h4 class="alert-heading"><%= err.message %></h4>
-      <p> Oops, we've got some error :( </p>
+
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading"><%= err.message %></h4>
+        <p> Oops, we've got some error :( </p>
+      </div>
     </div>
   </div>
 </div>
