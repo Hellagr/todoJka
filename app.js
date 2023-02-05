@@ -7,6 +7,8 @@ const Taskpanel = require('./models/taskpanel');
 const morgan = require('morgan');
 const wrapAsync = require('./utils/wrapAsync');
 const AppError = require('./utils/AppError');
+const Joi = require('joi');
+const { taskpanelSchema } = require('./validateJoiSchema');
 
 mongoose.connect('mongodb://localhost:27017/todojka', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 })
 
@@ -24,19 +26,31 @@ app.use(express.static(path.join(__dirname, "models/taskpanel")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+const validateTaskpanel = (req, res, next) => {
+    const { error } = taskpanelSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new AppError(msg, 400)
+    } else {
+        next();
+    }
+
+}
+
 app.get("/", wrapAsync(async (req, res, next) => {
     const taskpanels = await Taskpanel.find({});
     res.render('home', { taskpanels })
 }));
 
-app.post("/", wrapAsync(async (req, res) => {
-    if (!req.body.taskpanel) throw new AppError('Invalid Card Data!', 400);
+app.post("/", validateTaskpanel, wrapAsync(async (req, res) => {
+
+    // if (!req.body.taskpanel) throw new AppError('Invalid Card Data!', 400);
     const taskpanel = new Taskpanel(req.body.taskpanel);
     await taskpanel.save();
     res.redirect(`/`);
 }));
 
-app.put('/:id', wrapAsync(async (req, res) => {
+app.put('/:id', validateTaskpanel, wrapAsync(async (req, res) => {
     if (!req.body.taskpanel) throw new AppError('Invalid Card Data!', 400);
     const { id } = req.params;
     const taskpanel = await Taskpanel.findByIdAndUpdate(id, { ...req.body.taskpanel });
