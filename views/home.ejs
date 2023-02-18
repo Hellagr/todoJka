@@ -1,9 +1,11 @@
 <%- include('../partials/head.ejs')%>
 <%- include('../partials/navbar.ejs')%>
-<h1>Your Card</h1>
 
+<h1>Your Cards</h1>
 <div class="container-fluid">
+  <%- include('../partials/flash.ejs') %>
   <div class="row">
+
 
     <%- include('../partials/card.ejs')%>
     <%- include('../partials/addcard.ejs')%>

@@ -5,7 +5,9 @@ const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
-
+const flash = require('connect-flash');
+const wrapAsync = require('./utils/wrapAsync');
+const AppError = require('./utils/AppError');
 
 
 const startroutes = require('./routes/startroutes');
@@ -36,7 +38,14 @@ const sessionConfig = {
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
+
 app.use(session(sessionConfig));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    next();
+})
 
 app.use('/', startroutes);
 

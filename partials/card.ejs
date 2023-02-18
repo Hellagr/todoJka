@@ -15,14 +15,12 @@
 
   <div id="<%= taskpanel.id %>" class="mngBtn">
     <button id="<%= taskpanel.id %>" onClick="reply_click(this.id)" class="btn btn-warning" style="border-radius: 50%;" title="Edit card">&#9998;</button>
-
     <form action="/<%= taskpanel._id %>?_method=DELETE" method="POST">
       <button class="btn btn-danger" style="border-radius: 50%;" title="Delete card">&#10006;</button>
     </form>
   </div>
 
   <form id="<%= taskpanel.id %>" style="display: none;" class="editForm" action="/<%= taskpanel._id %>?_method=PUT" method="POST" novalidate>
-
     <div class="confirm">
       <label for="title"></label>
       <textarea class="form-control h-25 d-inline-block" name="taskpanel[title]" id="title" rows="1" required><%= taskpanel.title %></textarea>
