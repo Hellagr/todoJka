@@ -4,3 +4,4 @@ npm i bootstrap@5.2.3
 npm i morgan
 npm i joi
 npm i express-session
+npm i connect-flash
