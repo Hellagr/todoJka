@@ -3,14 +3,19 @@ const app = express();
 const path = require('path');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const morgan = require('morgan');
 const session = require('express-session');
 const flash = require('connect-flash');
 const wrapAsync = require('./utils/wrapAsync');
 const AppError = require('./utils/AppError');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user');
 
-
+const userRoutes = require('./routes/users');
 const startroutes = require('./routes/startroutes');
+const { authenticate } = require('passport');
 
 mongoose.connect('mongodb://localhost:27017/todojka', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 })
 
@@ -20,6 +25,7 @@ db.once("open", () => {
     console.log("Database connected");
 })
 
+app.engine('ejs', ejsMate);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, "node_modules/bootstrap/dist/")));
@@ -27,6 +33,7 @@ app.use(express.static(path.join(__dirname, "views/")));
 app.use(express.static(path.join(__dirname, "models/taskpanel")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
 
 const sessionConfig = {
     secret: 'secretword',
@@ -42,11 +49,19 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     next();
 })
 
+app.use('/', userRoutes);
 app.use('/', startroutes);
 
 app.all('*', (req, res, next) => {
