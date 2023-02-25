@@ -5,3 +5,4 @@ npm i morgan
 npm i joi
 npm i express-session
 npm i connect-flash
+npm i ejs-mate
