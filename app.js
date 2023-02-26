@@ -14,7 +14,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 
 const userRoutes = require('./routes/users');
-const startroutes = require('./routes/startroutes');
+const startRoutes = require('./routes/startroutes');
 const { authenticate } = require('passport');
 
 mongoose.connect('mongodb://localhost:27017/todojka', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 })
@@ -62,7 +62,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/', userRoutes);
-app.use('/', startroutes);
+app.use('/', startRoutes);
 
 app.all('*', (req, res, next) => {
     next(new AppError('Page not found', 404));
