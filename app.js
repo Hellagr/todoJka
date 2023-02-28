@@ -58,11 +58,13 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
 })
 
 app.use('/', userRoutes);
 app.use('/', startRoutes);
+
 
 app.all('*', (req, res, next) => {
     next(new AppError('Page not found', 404));
