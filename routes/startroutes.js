@@ -14,7 +14,6 @@ const validateTaskpanel = (req, res, next) => {
     } else {
         next();
     }
-
 }
 
 router.get("/", wrapAsync(async (req, res, next) => {
