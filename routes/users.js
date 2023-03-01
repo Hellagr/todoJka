@@ -14,8 +14,7 @@ router.post('/register', wrapAsync(async (req, res) => {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
         const registeredUser = await User.register(user, password);
-        console.log(registeredUser);
-        req.flash(`'Welcome to todoCard App, ${username}'`);
+        req.flash('Welcome to todoCard App!');
         res.redirect('/');
     } catch (err) {
         let error = err.message;
@@ -28,14 +27,14 @@ router.post('/register', wrapAsync(async (req, res) => {
 
 router.get('/login', (req, res) => {
     res.render('users/login');
-})
+});
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     try {
-        req.flash('success', 'Welcome back!')
+        req.flash('success', `'Welcome back, ${username}!'`);
     } catch (err) {
         req.flash('error', 'Password or username is incorrect');
     }
-})
+});
 
 module.exports = router;

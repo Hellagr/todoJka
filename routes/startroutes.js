@@ -5,6 +5,7 @@ const AppError = require('../utils/AppError');
 const Joi = require('joi');
 const { taskpanelSchema } = require('../validateJoiSchema');
 const Taskpanel = require('../models/taskpanel');
+const passport = require('passport');
 
 const validateTaskpanel = (req, res, next) => {
     const { error } = taskpanelSchema.validate(req.body);
@@ -22,6 +23,7 @@ router.get("/", wrapAsync(async (req, res, next) => {
 }));
 
 router.post("/", validateTaskpanel, wrapAsync(async (req, res) => {
+    
     const taskpanel = new Taskpanel(req.body.taskpanel);
     await taskpanel.save();
     req.flash('success', 'Successfully made a new Card!');
