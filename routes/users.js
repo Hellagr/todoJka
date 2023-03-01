@@ -1,4 +1,5 @@
 const express = require('express');
+const { session } = require('passport');
 const passport = require('passport');
 const router = express.Router();
 const User = require('../models/user');
@@ -16,10 +17,14 @@ router.post('/register', wrapAsync(async (req, res) => {
         const registeredUser = await User.register(user, password);
         req.flash('Welcome to todoCard App!');
         res.redirect('/');
+        console.log('1')
     } catch (err) {
         let error = err.message;
         if (error.includes('duplicate') && error.includes('index: email_1 dup key')) {
             req.flash('error', 'This email is already registered. Please use another email.');
+            res.redirect('register');
+        } else {
+            req.flash('error', 'This username is already registered. Please use another username.');
             res.redirect('register');
         }
     }
@@ -31,9 +36,11 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
     try {
-        req.flash('success', `'Welcome back, ${username}!'`);
-    } catch (err) {
+        req.flash('success', 'Welcome back!');
+        res.redirect('/');
+    } catch (error) {
         req.flash('error', 'Password or username is incorrect');
+        res.redirect('/login');
     }
 });
 

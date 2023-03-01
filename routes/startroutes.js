@@ -23,7 +23,6 @@ router.get("/", wrapAsync(async (req, res, next) => {
 }));
 
 router.post("/", validateTaskpanel, wrapAsync(async (req, res) => {
-    
     const taskpanel = new Taskpanel(req.body.taskpanel);
     await taskpanel.save();
     req.flash('success', 'Successfully made a new Card!');
