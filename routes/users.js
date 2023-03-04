@@ -10,14 +10,16 @@ router.get('/register', (req, res) => {
     res.render('users/register');
 })
 
-router.post('/register', wrapAsync(async (req, res) => {
+router.post('/register', wrapAsync(async (req, res, next) => {
     try {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
         const registeredUser = await User.register(user, password);
-        req.flash('Welcome to todoCard App!');
-        res.redirect('/');
-        console.log('1')
+        req.login(registeredUser, err => {
+            if (err) return next(err);
+            req.flash('Welcome to todoCard App!');
+            res.redirect('/');
+        });
     } catch (err) {
         let error = err.message;
         if (error.includes('duplicate') && error.includes('index: email_1 dup key')) {
@@ -34,14 +36,30 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
-    try {
-        req.flash('success', 'Welcome back!');
-        res.redirect('/');
-    } catch (error) {
-        req.flash('error', 'Password or username is incorrect');
-        res.redirect('/login');
-    }
+router.post('/login', passport.authenticate('local', { failureFlash: true, keepSessionInfo: true, failureRedirect: '/login' }),
+    (req, res) => {
+        try {
+            console.log(req.session.returnTo)
+            req.flash('success', 'Welcome back!');
+            const redirectUrl = req.session.returnTo || '/';
+            console.log(redirectUrl)
+            // delete req.session.returnTo;
+            res.redirect(redirectUrl);
+        } catch (error) {
+            req.flash('error', 'Password or username is incorrect');
+            res.redirect('/login');
+        }
+    });
+
+router.get("/logout", function (req, res, next) {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        req.flash('success', 'Goodbye!');
+        res.redirect("/login");
+    });
+
 });
 
 module.exports = router;

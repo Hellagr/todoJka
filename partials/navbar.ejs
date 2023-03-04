@@ -7,16 +7,22 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav me-auto mb-2 mb-lg-0">
         <a class="nav-link active text-white" href="/">Home</a>
-        <a class="nav-link text-white" href="/">Features</a>
-        <a class="nav-link text-white" href="/">Pricing</a>
+        <a class="nav-link text-white" href="/completed">Completed</a>
+        <a class="nav-link text-white" href="/deleted">Deleted</a>
       </div>
       <div class="">
+        <% if (!currentUser) {%>
         <button class="btn btn-outline-secondary" onclick="window.location.href='http://localhost:3000/register';">
           Register
         </button>
         <button class="btn btn-outline-secondary" onclick="window.location.href='http://localhost:3000/login';">
           Login
         </button>
+        <% } else { %>
+        <button class="btn btn-outline-secondary" onclick="window.location.href='http://localhost:3000/logout';">
+          Logout
+        </button>
+        <% } %>
       </div>
     </div>
 
