@@ -39,11 +39,9 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', { failureFlash: true, keepSessionInfo: true, failureRedirect: '/login' }),
     (req, res) => {
         try {
-            console.log(req.session.returnTo)
             req.flash('success', 'Welcome back!');
             const redirectUrl = req.session.returnTo || '/';
-            console.log(redirectUrl)
-            // delete req.session.returnTo;
+            delete req.session.returnTo;
             res.redirect(redirectUrl);
         } catch (error) {
             req.flash('error', 'Password or username is incorrect');
