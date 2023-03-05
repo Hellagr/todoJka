@@ -4,7 +4,8 @@ const wrapAsync = require('../utils/wrapAsync');
 const AppError = require('../utils/AppError');
 const Joi = require('joi');
 const { taskpanelSchema } = require('../validateJoiSchema');
-const Taskpanel = require('../models/user');
+const Taskpanel = require('../models/taskpanel');
+const User = require('../models/user');
 const passport = require('passport');
 const { middlewareAuth } = require('../middlewareAuth');
 const { route } = require('./Users');
@@ -20,8 +21,18 @@ const validateTaskpanel = (req, res, next) => {
 }
 
 router.get("/", middlewareAuth, wrapAsync(async (req, res, next) => {
-    const taskpanels = await Taskpanel.find({});
-    res.render('home', { taskpanels });
+    const sessionUser = req.session.passport.user;
+    const dbUser = await User.find({ username: sessionUser });
+
+    console.log(dbUser[1]);
+
+    // dbUser.forEach((item) => {
+    //     return item.username;
+    // });
+
+    // const taskpanels = await Taskpanel.find({});
+    // res.render('home', { taskpanels });
+    next();
 }));
 
 router.post("/", middlewareAuth, validateTaskpanel, wrapAsync(async (req, res) => {

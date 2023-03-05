@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const taskSchema = new Schema({
     title: String,
     task: String,
-    colorBorder: String,
+    colorBorder: String
 })
 
 module.exports = mongoose.model('Taskpanel', taskSchema);
