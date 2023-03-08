@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const taskpanel = require('./taskpanel');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -9,7 +8,7 @@ const userSchema = new Schema({
         require: true,
         unique: true
     },
-    taskpanels: [{ type: Schema.Types.ObjectId, ref: 'taskpanel' }]
+    taskpanels: [{ type: Schema.Types.ObjectId, ref: 'Taskpanel' }]
 });
 
 userSchema.plugin(passportLocalMongoose);

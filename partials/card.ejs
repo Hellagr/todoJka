@@ -1,11 +1,16 @@
-<% for (let taskpanel of taskpanels) {%>
+<% for (let taskpanel of taskpanels) { %>
+<% for (let y = 0; y = dbUser[0].taskpanels.length; y++) {%>
+<% } %>
+
 
 <div class="card" id="card" style="border-color: <%= taskpanel.colorBorder %>">
 
   <div id="<%= taskpanel.id %>" class="valueIncard">
+
     <form action="/" method="get">
       <div class="valueTitle">
         <%= taskpanel.title %>
+
       </div>
       <div class="valueTask" style="overflow: auto;">
         <%= taskpanel.task %>
