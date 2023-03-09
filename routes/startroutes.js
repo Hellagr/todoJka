@@ -25,14 +25,8 @@ const validateTaskpanel = (req, res, next) => {
 router.get("/", middlewareAuth, wrapAsync(async (req, res) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
-
-
-
     const taskpanels = await Taskpanel.find({});
-
-
     res.render('home', { taskpanels, dbUser });
-
 }));
 
 router.post("/", middlewareAuth, validateTaskpanel, wrapAsync(async (req, res) => {
@@ -42,9 +36,7 @@ router.post("/", middlewareAuth, validateTaskpanel, wrapAsync(async (req, res) =
     await addNewCard.save();
     // dbUser[0].taskpanels.shift()
     dbUser[0].taskpanels.push(addNewCard)
-
     await dbUser[0].save();
-    // console.log(`'Task: '${dbUser[0].taskpanels}`)
     req.flash('success', 'Successfully made a new Card!');
     res.redirect(`/`);
 }));
