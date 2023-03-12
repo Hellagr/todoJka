@@ -1,7 +1,4 @@
-<% for (let x of dbUser[0].taskpanels) { %>
 <% for (let taskpanel of taskpanels) { %>
-<% if ( x == taskpanel.id) { %>
-
 
 <div class="card" id="card" style="border-color: <%= taskpanel.colorBorder %>">
   <div id="<%= taskpanel.id %>" class="valueIncard">
@@ -40,6 +37,4 @@
     </div>
   </form>
 </div>
-<% } %>
-<% } %>
 <% } %>

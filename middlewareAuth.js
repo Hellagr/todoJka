@@ -1,3 +1,6 @@
+const { taskpanelSchema } = require('./validateJoiSchema');
+const Joi = require('joi');
+
 module.exports.middlewareAuth = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl;
@@ -6,3 +9,13 @@ module.exports.middlewareAuth = (req, res, next) => {
     }
     next();
 };
+
+module.exports.validateTaskpanel = (req, res, next) => {
+    const { error } = taskpanelSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new AppError(msg, 400)
+    } else {
+        next();
+    }
+}
