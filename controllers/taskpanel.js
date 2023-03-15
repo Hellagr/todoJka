@@ -43,3 +43,11 @@ module.exports.deleteTask = async (req, res) => {
     res.redirect('/');
 }
 
+module.exports.completed = (req, res) => {
+    res.render('./otherCards/completed');
+}
+
+module.exports.deleted = (req, res) => {
+    res.render('./otherCards/deleted');
+}
+

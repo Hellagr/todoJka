@@ -19,12 +19,8 @@ router.route('/:id')
     .put(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.changeTask))
     .delete(middlewareAuth, wrapAsync(taskpanelController.deleteTask));
 
-router.get('/completed', middlewareAuth, (req, res) => {
-    res.render('./otherCards/completed');
-});
+router.get('/completed', middlewareAuth(taskpanelController.completed));
 
-router.get('/deleted', middlewareAuth, (req, res) => {
-    res.render('./otherCards/deleted');
-});
+router.get('/deleted', middlewareAuth(taskpanelController.deleted));
 
 module.exports = router;
