@@ -6,8 +6,6 @@ const User = require('../models/user');
 const passport = require('passport');
 const { middlewareAuth } = require('../middlewareAuth');
 const { validateTaskpanel } = require('../middlewareAuth');
-const { route } = require('./Users');
-const { authorize } = require('passport');
 const taskpanelController = require('../controllers/taskpanel');
 
 
