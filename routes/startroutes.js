@@ -11,10 +11,13 @@ const { populate, db } = require('../models/taskpanel');
 const taskpanelController = require('../controllers/taskpanel');
 const { validateTaskpanel } = require('../middlewareAuth');
 
-router.get("/", middlewareAuth, wrapAsync(taskpanelController.home));
-router.post("/", middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
-router.put('/:id', middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.changeTask));
-router.delete('/:id', middlewareAuth, wrapAsync(taskpanelController.deleteTask));
+router.route('/')
+    .get(middlewareAuth, wrapAsync(taskpanelController.home))
+    .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
+
+router.route('/:id')
+    .put(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.changeTask))
+    .delete(middlewareAuth, wrapAsync(taskpanelController.deleteTask));
 
 router.get('/completed', middlewareAuth, (req, res) => {
     res.render('./otherCards/completed');
