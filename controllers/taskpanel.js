@@ -1,7 +1,11 @@
 const User = require('../models/user');
 const Taskpanel = require('../models/taskpanel');
 
-module.exports.home = async (req, res) => {
+module.exports.homepage = (req, res) => {
+    res.render('./otherCards/homepage');
+}
+
+module.exports.userpanel = async (req, res) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
     const idUserTask = dbUser[0].taskpanels;

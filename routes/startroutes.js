@@ -9,8 +9,10 @@ const { validateTaskpanel } = require('../middlewareAuth');
 const taskpanelController = require('../controllers/taskpanel');
 
 
-router.route('/')
-    .get(middlewareAuth, wrapAsync(taskpanelController.home))
+router.get('/', taskpanelController.homepage);
+
+router.route('/userpanel')
+    .get(middlewareAuth, wrapAsync(taskpanelController.userpanel))
     .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
 
 router.route('/:id')
