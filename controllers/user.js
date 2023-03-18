@@ -34,7 +34,7 @@ module.exports.login = (req, res) => {
 module.exports.authenticate = (req, res) => {
     try {
         req.flash('success', 'Welcome back!');
-        const redirectUrl = req.session.returnTo || '/';
+        const redirectUrl = req.session.returnTo || '/userpanel';
         delete req.session.returnTo;
         res.redirect(redirectUrl);
     } catch (error) {

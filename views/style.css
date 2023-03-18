@@ -110,3 +110,19 @@ br {
     display: flex;
     flex-direction: column;
 }
+
+.wBack {
+    color: white;
+    padding-right: 1rem;
+}
+
+a {
+    outline: 0;
+    text-decoration: none;
+    color: white;
+}
+
+body {
+    background-image: url('wallpapper.jpg');
+    background-size: cover;
+}

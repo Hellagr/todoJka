@@ -10,6 +10,9 @@
         <a class="nav-link text-white" href="/completed">Completed</a>
         <a class="nav-link text-white" href="/deleted">Deleted</a>
       </div>
+      <div class="wBack">
+        <h5>Welcome back, <a style="outline: 0;" href="/userpanel"><%= currentUser.username %>!</a></h5>
+      </div>
       <div class="">
         <% if (!currentUser) {%>
         <button class="btn btn-outline-secondary" onclick="window.location.href='http://localhost:3000/register';">
