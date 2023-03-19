@@ -5,16 +5,17 @@ module.exports.homepage = (req, res) => {
     res.render('./otherCards/homepage');
 }
 
-module.exports.userpanel = async (req, res) => {
+module.exports.userpanels = async (req, res) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
     const idUserTask = dbUser[0].taskpanels;
     const taskpanels = await Taskpanel.find({ _id: idUserTask });
-    res.render('home', { taskpanels });
+    res.render('userHomePage', { taskpanels });
 }
 
 module.exports.createTask = async (req, res) => {
     const sessionUser = req.session.passport.user;
+    console.log(sessionUser)
     const dbUser = await User.find({ username: sessionUser });
     const addNewCard = new Taskpanel(req.body.taskpanel);
     await addNewCard.save();
@@ -23,7 +24,7 @@ module.exports.createTask = async (req, res) => {
     await dbUser[0].taskpanels.push(addNewCard)
     await dbUser[0].save();
     req.flash('success', 'Successfully made a new Card!');
-    res.redirect(`/`);
+    res.redirect(`/userpanel`);
 }
 
 module.exports.changeTask = async (req, res) => {
@@ -31,7 +32,7 @@ module.exports.changeTask = async (req, res) => {
     const { id } = req.params;
     const taskpanel = await Taskpanel.findByIdAndUpdate(id, { ...req.body.taskpanel });
     req.flash('success', 'Successfully update a Card!');
-    res.redirect('/');
+    res.redirect('/userpanel');
 }
 
 module.exports.deleteTask = async (req, res) => {
@@ -44,7 +45,7 @@ module.exports.deleteTask = async (req, res) => {
     await idUserTask.remove(idUserForDelete);
     await dbUser[0].save();
     req.flash('success', 'Successfully deleted a Card!');
-    res.redirect('/');
+    res.redirect('/userpanel');
 }
 
 module.exports.completed = (req, res) => {

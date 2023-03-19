@@ -12,7 +12,7 @@ br {
 .nav-link {
     padding: 0.25rem 0;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.5);
+    color: white;
     margin-left: 1rem;
     border-bottom: 0.25rem solid transparent;
 }
@@ -22,9 +22,8 @@ br {
     border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
-.nav-link.active {
-    color: white;
-    border-bottom-color: white;
+.nav-link:active {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .card {
@@ -112,8 +111,11 @@ br {
 }
 
 .wBack {
+    display: flex;
+    align-self: center;
     color: white;
     padding-right: 1rem;
+    padding-top: 0.5rem;
 }
 
 a {
@@ -122,7 +124,6 @@ a {
     color: white;
 }
 
-body {
-    background-image: url('wallpapper.jpg');
-    background-size: cover;
+a:hover {
+    color: rgba(255, 255, 255, 0.5);
 }
