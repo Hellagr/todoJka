@@ -15,7 +15,6 @@ module.exports.userpanels = async (req, res) => {
 
 module.exports.createTask = async (req, res) => {
     const sessionUser = req.session.passport.user;
-    console.log(sessionUser)
     const dbUser = await User.find({ username: sessionUser });
     const addNewCard = new Taskpanel(req.body.taskpanel);
     await addNewCard.save();
