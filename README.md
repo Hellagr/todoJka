@@ -7,3 +7,4 @@ npm i express-session
 npm i connect-flash
 npm i ejs-mate
 npm i passport passport-local passport-local-mongoose
+npm i multer
