@@ -20,7 +20,7 @@ module.exports.createTask = async (req, res) => {
     await addNewCard.save();
     // taskpanels.shift()
     // dbUser[0].taskpanels.shift()
-    await dbUser[0].taskpanels.push(addNewCard)
+    await dbUser[0].taskpanels.push(addNewCard);
     await dbUser[0].save();
     req.flash('success', 'Successfully made a new Card!');
     res.redirect(`/userpanel`);
