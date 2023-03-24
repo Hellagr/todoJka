@@ -8,7 +8,6 @@ const { middlewareAuth } = require('../middlewareAuth');
 const { validateTaskpanel } = require('../middlewareAuth');
 const taskpanelController = require('../controllers/taskpanel');
 const multer = require('multer')
-const kraken = require('../kraken')
 const upload = multer({ dest: 'uploads/' })
 
 
@@ -19,8 +18,16 @@ router.route('/userpanel')
     .get(middlewareAuth, wrapAsync(taskpanelController.userpanels))
     // .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
     .post(upload.single('wallpaper'), (req, res) => {
+        
+         
+        kraken.upload(opts, function (err, data) {
+            if (err) {
+                console.log('Failed. Error message: %s', err);
+            } else {
+                console.log('Success. Optimized image URL: %s', data.kraked_url);
+            }
+        });
         res.send(req.body, req.file);
-        console.log(kraken)
     });
 
 router.route('/:id')
