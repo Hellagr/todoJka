@@ -26,7 +26,7 @@ router.route('/userpanel')
             api_secret: process.env.KRAKEN_SECRET
         });
 
-        console.log(upload.buffer)
+        console.log(req.file.< buffer >)
 
         var params = {
             file: "/path/to/image/file.jpg",
