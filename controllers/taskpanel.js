@@ -3,7 +3,6 @@ const Taskpanel = require('../models/taskpanel');
 const kraken = require('../kraken')
 
 module.exports.homepage = (req, res) => {
-    console.log(kraken)
     res.render('./otherCards/homepage');
 }
 
