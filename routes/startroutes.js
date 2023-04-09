@@ -7,11 +7,12 @@ const passport = require('passport');
 const { middlewareAuth } = require('../middlewareAuth');
 const { validateTaskpanel } = require('../middlewareAuth');
 const taskpanelController = require('../controllers/taskpanel');
-const Kraken = require('kraken')
+
 const multer = require("multer");
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const { storage } = require('../cloudinary')
+const upload = multer({ storage });
 const fs = require('fs');
+
 
 
 router.get('/', taskpanelController.homepage);
@@ -19,28 +20,9 @@ router.get('/', taskpanelController.homepage);
 router.route('/userpanel')
     .get(middlewareAuth, wrapAsync(taskpanelController.userpanels))
     // .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
-    .post(upload.single('wallpaper'), (req, res) => {
-
-        const kraken = new Kraken({
-            api_key: process.env.KRAKEN_KEY,
-            api_secret: process.env.KRAKEN_SECRET
-        });
-
-        console.log(req.file.< buffer >)
-
-        var params = {
-            file: "/path/to/image/file.jpg",
-            wait: true
-        };
-
-        kraken.upload(params, function (status) {
-            if (status.success) {
-                console.log("Success. Optimized image URL: %s", status.kraked_url);
-            } else {
-                console.log("Fail. Error message: %s", status.message);
-            }
-
-        })
+    .post(upload.single('wallpaper'), async (req, res) => {
+        console.log(req.body, req.file)
+        res.send('worked')
     });
 
 router.route('/:id')
