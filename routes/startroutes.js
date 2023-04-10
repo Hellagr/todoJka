@@ -20,7 +20,7 @@ router.get('/', taskpanelController.homepage);
 router.route('/userpanel')
     .get(middlewareAuth, wrapAsync(taskpanelController.userpanels))
     // .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
-    .post(upload.single('wallpaper'), async (req, res) => {
+    .post(upload.single('wallpaper'), (req, res) => {
         console.log(req.body, req.file)
         res.send('worked')
     });

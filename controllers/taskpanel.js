@@ -10,6 +10,7 @@ module.exports.userpanels = async (req, res) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
     const idUserTask = dbUser[0].taskpanels;
+       
     const taskpanels = await Taskpanel.find({ _id: idUserTask });
     res.render('userHomePage', { taskpanels });
 }
@@ -20,7 +21,13 @@ module.exports.createTask = async (req, res) => {
     const addNewCard = new Taskpanel(req.body.taskpanel);
     await addNewCard.save();
     // taskpanels.shift()
-    // dbUser[0].taskpanels.shift()
+
+    dbUser[0].image = '';
+    console.log(req.file.path)
+    // dbUser[0].image = req.file.path;
+    
+    // dbUser[0].image.save()
+
     await dbUser[0].taskpanels.push(addNewCard);
     await dbUser[0].save();
     req.flash('success', 'Successfully made a new Card!');
