@@ -10,9 +10,9 @@ module.exports.userpanels = async (req, res) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
     const idUserTask = dbUser[0].taskpanels;
-       
+
     const taskpanels = await Taskpanel.find({ _id: idUserTask });
-    res.render('userHomePage', { taskpanels });
+    res.render('userHomePage', { dbUser, taskpanels });
 }
 
 module.exports.createTask = async (req, res) => {
@@ -22,10 +22,9 @@ module.exports.createTask = async (req, res) => {
     await addNewCard.save();
     // taskpanels.shift()
 
-    dbUser[0].image = '';
-    console.log(req.file.path)
+
     // dbUser[0].image = req.file.path;
-    
+
     // dbUser[0].image.save()
 
     await dbUser[0].taskpanels.push(addNewCard);

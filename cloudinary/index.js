@@ -9,8 +9,10 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
     cloudinary,
-    folder: 'todoCardAPP',
-    allowedFormats: ['jpeg', 'png', 'jpg']
+    params: {
+        folder: 'todoCardAPP',
+        allowedFormats: ['jpeg', 'png', 'jpg']
+    }
 });
 
 module.exports = {

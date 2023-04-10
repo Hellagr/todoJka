@@ -19,11 +19,18 @@ router.get('/', taskpanelController.homepage);
 
 router.route('/userpanel')
     .get(middlewareAuth, wrapAsync(taskpanelController.userpanels))
-    // .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
-    .post(upload.single('wallpaper'), (req, res) => {
-        console.log(req.body, req.file)
-        res.send('worked')
-    });
+    .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
+
+router.post('/userpanelwallpaper', upload.single('wallpaper'), async (req, res) => {
+    const sessionUser = req.session.passport.user;
+    const dbUser = await User.find({ username: sessionUser });
+    dbUser[0].image = '';
+    dbUser[0].image = req.file.path;
+    console.log(dbUser[0])
+    await dbUser[0].save();
+    res.redirect('/userpanel');
+});
+
 
 router.route('/:id')
     .put(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.changeTask))
