@@ -10,10 +10,13 @@
     <button id="addBtn" class="btn btn-primary">+</button>
   </div>
 </div>
-<div class="position-absolute bottom-0 end-0 mb-3">
+
+<div class="position-absolute bottom-0 end-0 mb-3 me-3">
   <form method="POST" action="/userpanelwallpaper" enctype="multipart/form-data">
-    <input type="file" name="wallpaper">
-    <button type="submit">YEAP</button>
+    <div class="input-group">
+      <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="wallpaper">
+      <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Change wallpaper</button>
+    </div>
   </form>
 </div>
 <%- include('../partials/footer.ejs')%>

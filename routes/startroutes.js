@@ -4,7 +4,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const Taskpanel = require('../models/taskpanel');
 const User = require('../models/user');
 const passport = require('passport');
-const { middlewareAuth } = require('../middlewareAuth');
+const { middlewareAuth, validateUserImage } = require('../middlewareAuth');
 const { validateTaskpanel } = require('../middlewareAuth');
 const taskpanelController = require('../controllers/taskpanel');
 
@@ -21,13 +21,16 @@ router.route('/userpanel')
     .get(middlewareAuth, wrapAsync(taskpanelController.userpanels))
     .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
 
-router.post('/userpanelwallpaper', upload.single('wallpaper'), async (req, res) => {
+router.post('/userpanelwallpaper', upload.single('wallpaper'), async (req, res, next) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
-    dbUser[0].image = '';
-    dbUser[0].image = req.file.path;
-    console.log(dbUser[0])
-    await dbUser[0].save();
+    if (!req.file == 'undefined') {
+        dbUser[0].image = '';
+        dbUser[0].image = req.file.path;
+        await dbUser[0].save();
+    } else {
+        req.flash('error', 'Please, choise a file if you want to set your wallpaper!');
+    }
     res.redirect('/userpanel');
 });
 

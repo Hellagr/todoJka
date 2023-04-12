@@ -7,4 +7,3 @@ module.exports.taskpanelSchema = Joi.object({
         colorBorder: Joi.string().required()
     }).required()
 })
-
