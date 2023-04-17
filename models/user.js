@@ -8,7 +8,10 @@ const userSchema = new Schema({
         require: true,
         unique: true
     },
-    image: String,
+    image: {
+        url: String,
+        filename: String
+    },
     taskpanels: [{ type: Schema.Types.ObjectId, ref: 'Taskpanel' }]
 });
 

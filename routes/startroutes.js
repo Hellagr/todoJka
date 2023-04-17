@@ -9,7 +9,7 @@ const { validateTaskpanel } = require('../middlewareAuth');
 const taskpanelController = require('../controllers/taskpanel');
 
 const multer = require("multer");
-const { storage } = require('../cloudinary')
+const { storage, cloudinary } = require('../cloudinary')
 const upload = multer({ storage });
 const fs = require('fs');
 
@@ -21,15 +21,22 @@ router.route('/userpanel')
     .get(middlewareAuth, wrapAsync(taskpanelController.userpanels))
     .post(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.createTask));
 
-router.post('/userpanelwallpaper', upload.single('wallpaper'), async (req, res, next) => {
+router.post('/userpanelwallpaper', upload.single('wallpaper'), async (req, res) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
-    if (!req.file == 'undefined') {
-        dbUser[0].image = '';
-        dbUser[0].image = req.file.path;
-        await dbUser[0].save();
-    } else {
-        req.flash('error', 'Please, choise a file if you want to set your wallpaper!');
+    try {
+        if (req.file) {
+            await cloudinary.uploader.destroy(dbUser[0].image.filename);
+            dbUser[0].image.url = '';
+            dbUser[0].image.filename = '';
+            dbUser[0].image.url = req.file.path;
+            dbUser[0].image.filename = req.file.filename;
+            await dbUser[0].save();
+        } else {
+            req.flash('error', 'Please, choise a file if you want to set your wallpaper!');
+        }
+    } catch (err) {
+        req.flash('error', err);
     }
     res.redirect('/userpanel');
 });
