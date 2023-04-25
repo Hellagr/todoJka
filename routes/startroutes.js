@@ -24,19 +24,21 @@ router.route('/userpanel')
 router.post('/userpanelwallpaper', upload.single('wallpaper'), async (req, res) => {
     const sessionUser = req.session.passport.user;
     const dbUser = await User.find({ username: sessionUser });
+    const userImg = dbUser[0].image.filename;
     try {
-        if (req.file) {
-            await cloudinary.uploader.destroy(dbUser[0].image.filename);
-            dbUser[0].image.url = '';
-            dbUser[0].image.filename = '';
-            dbUser[0].image.url = req.file.path;
-            dbUser[0].image.filename = req.file.filename;
-            await dbUser[0].save();
-        } else {
-            req.flash('error', 'Please, choise a file if you want to set your wallpaper!');
-        }
+        await cloudinary.uploader.destroy(userImg);
     } catch (err) {
-        req.flash('error', err);
+        console.log(err)
+    }
+    console.log(req.file)
+    if (req.file) {
+        dbUser[0].image.url = '';
+        dbUser[0].image.filename = '';
+        dbUser[0].image.url = req.file.path;
+        dbUser[0].image.filename = req.file.filename;
+        await dbUser[0].save();
+    } else {
+        req.flash('error', 'Please, choise a file if you want to set your wallpaper!');
     }
     res.redirect('/userpanel');
 });
