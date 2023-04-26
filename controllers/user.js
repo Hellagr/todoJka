@@ -32,6 +32,10 @@ module.exports.newUserPost = async (req, res, next) => {
 }
 
 module.exports.login = (req, res) => {
+    if (req.isAuthenticated()) {
+        req.flash('error', 'You have to logout.')
+        return res.redirect('/userpanel');
+    }
     res.render('users/login');
 }
 
