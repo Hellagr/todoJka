@@ -2,6 +2,10 @@ const User = require('../models/user');
 const wrapAsync = require('../utils/wrapAsync');
 
 module.exports.register = (req, res) => {
+    if (req.isAuthenticated()) {
+        req.flash('error', 'You have to logout.')
+        return res.redirect('/userpanel');
+    }
     res.render('users/register');
 }
 

@@ -24,8 +24,8 @@ br {
     border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
-.nav-link:active {
-    color: rgba(255, 255, 255, 0.5);
+.nav-link .active {
+    color: rgba(246, 28, 28, 0.5);
 }
 
 .card {

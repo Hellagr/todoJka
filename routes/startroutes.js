@@ -48,8 +48,7 @@ router.route('/:id')
     .put(middlewareAuth, validateTaskpanel, wrapAsync(taskpanelController.changeTask))
     .delete(middlewareAuth, wrapAsync(taskpanelController.deleteTask));
 
-router.get('/completed', middlewareAuth, taskpanelController.completed);
-
-router.get('/deleted', middlewareAuth, taskpanelController.deleted);
+// router.get('/completed', middlewareAuth, taskpanelController.completed);
+// router.get('/deleted', middlewareAuth, taskpanelController.deleted);
 
 module.exports = router;
