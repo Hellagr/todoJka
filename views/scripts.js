@@ -2,11 +2,12 @@
 
 
 const addBtn = document.querySelector('#addBtn')
-addBtn.addEventListener('click', hideAddcard);
-function hideAddcard() {
-    document.getElementById('addCard').style.display = 'inline';
+if (addBtn) {
+    addBtn.addEventListener('click', hideAddcard);
+    function hideAddcard() {
+        document.getElementById('addCard').style.display = 'inline';
+    }
 }
-
 const valueIncard = document.querySelector('.valueIncard');
 const editformCancelBtn = document.querySelector('.cancelBtn')
 

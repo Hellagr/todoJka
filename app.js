@@ -10,18 +10,23 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const morgan = require('morgan');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const wrapAsync = require('./utils/wrapAsync');
 const AppError = require('./utils/AppError');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const helmet = require('helmet');
 
 const userRoutes = require('./routes/users');
 const startRoutes = require('./routes/startroutes');
 const { authenticate } = require('passport');
 
-mongoose.connect('mongodb://localhost:27017/todojka', { useNewUrlParser: true, useUnifiedTopology: true, family: 4 })
+const dbUrl = process.env.DB_URL;
+
+
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true, family: 4 })
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -40,8 +45,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+const store = new MongoStore({
+    url: dbUrl,
+    secret: 'secretword',
+    touchAfter: 24 * 60 * 60
+})
+
+store.on("error", function (e) {
+    console.log("SESSION STORE ERROR, e")
+})
 
 const sessionConfig = {
+    store,
     secret: 'secretword',
     resave: false,
     saveUninitialized: true,
@@ -52,8 +67,18 @@ const sessionConfig = {
     }
 }
 
+
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            "script-src-elem": ["self", "http://localhost:3000/js/bootstrap.min.js", "http://localhost:3000/scripts.js", "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js", "https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js", "'unsafe-inline'"],
+            "img-src": ["'self'", "wallpaperaccess.com", "www.w3.org"],
+            "script-src-attr": ["'unsafe-inline'"]
+        }
+    }
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
