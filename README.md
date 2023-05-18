@@ -11,3 +11,5 @@ multer
 cloudinary
 multer-storage-cloudinary
 dotenv
+connect-mongo@3.2.0
+helmet
